@@ -1,0 +1,20 @@
+service: chat-backend-sls
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  hello:
+    handler: src/handlers.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-auto-swagger
+  - serverless-plugin-typescript
+  - serverless-offline
+  
