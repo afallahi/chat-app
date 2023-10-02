@@ -38,6 +38,13 @@ const handleConnect = async (connectionId: string, queryParams: APIGatewayProxyE
         return ErrorResponse(403, "Forbidden!");
     }
 
+    const existingConnectionId = await getConnectionIdByUsername(queryParams["username"]);
+    //   if (existingConnectionId &&
+    //     (await postToConnection(existingConnectionId, JSON.stringify({ type: "ping" })))
+    //   ) {
+    //     return ErrorResponse(403, "User already exists");
+    //   }
+
     await ddbDocClient.put({
         TableName: USERS_TABLE_NAME,
         Item: {
@@ -50,6 +57,23 @@ const handleConnect = async (connectionId: string, queryParams: APIGatewayProxyE
     return SuccessResponse({});
 };
 
+const getConnectionIdByUsername = async (username: string): Promise<string | undefined> => {
+
+    const res = await ddbDocClient.scan({
+      TableName: USERS_TABLE_NAME,
+      IndexName: "UsernameIndex",
+      FilterExpression: "#username = :username",
+      ExpressionAttributeNames: {
+        "#username": "username",
+      },
+      ExpressionAttributeValues: {
+        ":username": username,
+      },
+    })
+    .promise();
+
+  return res.Items && res.Items.length > 0 ? res.Items[0].connectionId : undefined;
+}
 
 const handleDisonnect = async (connectionId: string): Promise<APIGatewayProxyResult> => {
 
@@ -65,12 +89,13 @@ const handleDisonnect = async (connectionId: string): Promise<APIGatewayProxyRes
 };
 
 
-const postToConnection = async (connectionId: string, data: string) => {
+const postToConnection = async (connectionId: string, data: string): Promise<boolean> => {
     try {
         await apiGwMgmApi.postToConnection({
             ConnectionId: connectionId,
             Data: data
         }).promise();
+        return true
     
     } catch (e) {
         if ( (e as AWSError).statusCode !== 410 ) {
@@ -80,9 +105,10 @@ const postToConnection = async (connectionId: string, data: string) => {
         await ddbDocClient.delete({
             TableName: USERS_TABLE_NAME,
             Key: {
-                connectionId
+                connectionId: connectionId
             }
         }).promise();
+        return false
         
     }
 }
