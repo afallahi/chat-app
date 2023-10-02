@@ -98,7 +98,7 @@ resources:
           - AttributeName: connectionId
             KeyType: HASH
         GlobalSecondaryIndexes:
-          - IndexName: UserNameIndex
+          - IndexName: UsernameIndex
             KeySchema:
               - AttributeName: username
                 KeyType: HASH
