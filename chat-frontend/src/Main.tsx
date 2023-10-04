@@ -26,7 +26,6 @@ const Main = ({ setUsername }: {
                 <div>
                     <button 
                         onClick={(e) => {
-                            console.log("here");
                             usernameLocal === "" ? setErrorMessage("username is empty") : setUsername(usernameLocal) 
                         }}
                         className="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">
