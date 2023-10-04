@@ -27,7 +27,6 @@ export default function Sidebar({
         <div className="flex flex-col px-2">
           <div className="flex flex-col">
             {users.map((user, key) => (
-        
               <div key={key}>
                 <button
                   className="flex items-center p-3 bg-white rounded-xl"
