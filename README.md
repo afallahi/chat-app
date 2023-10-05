@@ -113,8 +113,8 @@ We detect the events and act based on them on decoupled services.
 - Agile development with leveraging the event router
 - Reduce costs by spinning the server (or serverless functions) only when trigerred by the event.
 
-### Function as a Service (Faas)
-Function as a Service (Faas) is the comouting part of the Serverless architecture.
+### Function as a Service (FaaS)
+Function as a Service (FaaS) is the comouting part of the Serverless architecture.
 
 #### Benefits
 - Decoupled
@@ -142,7 +142,9 @@ npm run deploy
 
 We are going to manually upload our React app to S3 bucket and create a website which will be avilable through Cloudfront.
 
-- Create a bucket policy that allows public read:
+#### Deploy Frontend with AWS CLI
+
+Create a bucket policy that allows public read:
 
 ```
 touch ./bucket_policy.json
@@ -166,7 +168,7 @@ Add the following into the policy json file:
 }
 ```
 
-- Run the commands below to get the website url:
+Run the commands below to get the website url:
 
 ```
 npm run build
@@ -185,7 +187,25 @@ The website should be available at
 http://<bucket-name>.s3-website.us-east-1.amazonaws.com/
 ```
 
-#### Demo
+#### Deploy Frontend with AWS Amplify
+
+To host the app with CloudFront and S3 using Amplify, use the `chat-amplify` folder and follow the steps below to publish the app:
+
+First configure the project
+
+```
+npm install
+amplify configure
+amplify int
+```
+Now is the time to publish
+
+```
+amplify add hosting
+amplify publish
+```
+
+### Demo
 
 
 Postman                    |  Chat App
