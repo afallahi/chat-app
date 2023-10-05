@@ -15,16 +15,25 @@
 ## Requirements
 
 ### Functional Requirements
-- Supports one-on-one conversation between 2 users.
-- Both Client A and Client B can initiate the call to start chat with the other party. 
-- Chat service stores and relays the messages.
-- Users get acknowledgemnets on their messages.
-- Messages are plain text.
-- Chat service provides persistent storage to save the messages when the recipient is offline.
+- [x] Conversation: Supports one-on-one conversation between 2 users. Both User A and User B can initiate the call to start chat with the other party. 
+- [x] Message Processing: Chat service stores and relays the messages.
+- [x] Acknowledgement: Users get acknowledgemnets on their messages.
+- [x] Media: Messages are in plain text.
+- [x] Storage: Chat service provides persistent storage to save the messages when the recipient is offline.
+
+**Out of scope:**
+- [ ] Media sharing: Users share files and photos
+- [ ] Notification: Users get notified if they are offline and get new messages.
+
 
 ### Non-Functional Requirements
-- Consistency: Chat service delivers the messages in the same order of receiving from chat parties.
-- Low Latency: User should recieve messages with low latency.
+- [x] Consistency: Chat service delivers the messages in the same order of receiving from chat parties.
+- [x] Low Latency: User should recieve messages with low latency.
+- [ ] Availability: Should be highly available.
+- [ ] Scalability: Should be highly scalable and adapt to the workload (i.e. number of users and number of messages in a given time period)
+
+**Out of scope:**
+- [ ] Security:  Communication must be secure.
 
 ## System Design
 
@@ -49,8 +58,8 @@
 
 ### Service Types
 
-- Stateful services: Authentications, profiles, etc (TBD)
-- Stateless services
+- Stateful services: 
+- Stateless services: Authentications, profiles, etc (TBD)
 - Third party integrations: e.g. push notifications (TBD)
 
 ## Architecture
