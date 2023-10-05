@@ -15,16 +15,25 @@
 ## Requirements
 
 ### Functional Requirements
-- Supports one-on-one conversation between 2 users.
-- Both Client A and Client B can initiate the call to start chat with the other party. 
-- Chat service stores and relays the messages.
-- Users get acknowledgemnets on their messages.
-- Messages are plain text.
-- Chat service provides persistent storage to save the messages when the recipient is offline.
+- [x] Conversation: Supports one-on-one conversation between 2 users. Both User A and User B can initiate the call to start chat with the other party. 
+- [x] Message Processing: Chat service stores and relays the messages.
+- [x] Acknowledgement: Users get acknowledgemnets on their messages.
+- [x] Media: Messages are in plain text.
+- [x] Storage: Chat service provides persistent storage to save the messages when the recipient is offline.
+
+**Out of scope:**
+- [ ] Media sharing: Users share files and photos
+- [ ] Notification: Users get notified if they are offline and get new messages.
+
 
 ### Non-Functional Requirements
-- Consistency: Chat service delivers the messages in the same order of receiving from chat parties.
-- Low Latency: User should recieve messages with low latency.
+- [x] Consistency: Chat service delivers the messages in the same order of receiving from chat parties.
+- [x] Low Latency: User should recieve messages with low latency.
+- [ ] Availability: Should be highly available.
+- [ ] Scalability: Should be highly scalable and adapt to the workload (i.e. number of users and number of messages in a given time period)
+
+**Out of scope:**
+- [ ] Security:  Communication must be secure.
 
 ## System Design
 
@@ -49,8 +58,8 @@
 
 ### Service Types
 
-- Stateful services: Authentications, profiles, etc (TBD)
-- Stateless services
+- Stateful services: 
+- Stateless services: Authentications, profiles, etc (TBD)
 - Third party integrations: e.g. push notifications (TBD)
 
 ## Architecture
@@ -73,13 +82,36 @@ For our Serverless Architecture, we use `DynamoDB` database.  DynamoDB is a serv
     <img src="https://github.com/afallahi/chat-app/assets/73287428/1112df12-ed6a-41d1-98f6-70cb1765fce9">
 </p>
 
+## Usage
 
-## CI/CD (TBD)
+### Deployment
 
-We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the appropriate pipeline for each project.
+#### Backend
+
+```
+npm run deploy
+```
+
+
+#### Demo
+
+
+Postman                    |  Chat App
+:-------------------------:|:-------------------------:
+![postman-to-chat-app](https://github.com/afallahi/chat-app/assets/73287428/fdb45117-c57f-42b2-85c5-407cee75ef92)  |  ![chat-app-to-postman](https://github.com/afallahi/chat-app/assets/73287428/a3d1cf51-e5c5-4a42-bba2-6323e28e6ff3)
+
+![chat-app](https://github.com/afallahi/chat-app/assets/73287428/4f1ce88f-773c-461a-817f-41b958404f0e)
+
+
+### CI/CD (TBD)
+
+We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the appropriate pipeline for each project (i.e. backend and frontend).
 
 <p align="center">
     <img src="https://github.com/afallahi/chat-app/assets/73287428/5df8c9c5-262a-4ba6-aefd-63f768c1cb0d">
 </p>
+
+
+
 
 
