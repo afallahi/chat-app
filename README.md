@@ -138,6 +138,52 @@ We use API Gateway (WebSocket), Lambda functions, and DynamoDB which are well su
 npm run deploy
 ```
 
+### Frontend
+
+We are going to manually upload our React app to S3 bucket and create a website which will be avilable through Cloudfront.
+
+- Create a bucket policy that allows public read:
+
+```
+touch ./bucket_policy.json
+code ./bucket_policy.json
+```
+
+Add the following into the policy json file:
+
+```{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<bucket-name>/*"
+        }
+    
+    ]
+}
+```
+
+- Run the commands below to get the website url:
+
+```
+npm run build
+aws s3api create-bucket --bucket <bucket-name> --region=us-east-1
+
+# When creating a new bucket, default policy doesn't grant public access (Amazon S3 Block Public Access is enabled). If your new bucket # # policy grants public access, you need to run this:
+
+aws s3api delete-public-access-block --bucket <bucket-name>
+aws s3api put-bucket-policy --bucket chat-frontend --policy file:///tmp/bucket_policy.json
+aws s3 sync ./build s3://<bucket-name>/
+aws s3 website s3://<bucket-name>/ --index-document index.html --error-document index.html
+```
+
+The website should be available at
+```
+http://<bucket-name>.s3-website.us-east-1.amazonaws.com/
+```
 
 #### Demo
 
