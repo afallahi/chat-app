@@ -98,7 +98,7 @@ const handleGetMessages = async (user: User, body: GetMessagesBody) => {
     const res = await ddbDocClient.scan({
       TableName: MESSAGES_TABLE_NAME,
       IndexName: "UsernameToUsernameIndex",
-      FilterExpression: "#usernameTousername = :usernameToUsername",
+      FilterExpression: "#usernameToUsername = :usernameToUsername",
       ExpressionAttributeNames: {
         "#usernameToUsername": "usernameToUsername",
       },
