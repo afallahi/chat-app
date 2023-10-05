@@ -10,6 +10,11 @@
       "StackName": "amplify-chatamplify-dev-153426",
       "StackId": "arn:aws:cloudformation:us-east-1:558532633158:stack/amplify-chatamplify-dev-153426/323250a0-63b6-11ee-b422-0eef13f409bf",
       "AmplifyAppId": "d1mj6zz22tgsll"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {}
+      }
     }
   }
 }
