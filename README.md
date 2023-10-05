@@ -73,13 +73,36 @@ For our Serverless Architecture, we use `DynamoDB` database.  DynamoDB is a serv
     <img src="https://github.com/afallahi/chat-app/assets/73287428/1112df12-ed6a-41d1-98f6-70cb1765fce9">
 </p>
 
+## Usage
 
-## CI/CD (TBD)
+### Deployment
 
-We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the appropriate pipeline for each project.
+#### Backend
+
+```
+npm run deploy
+```
+
+
+#### Demo
+
+
+Postman                    |  Chat App
+:-------------------------:|:-------------------------:
+![postman-to-chat-app](https://github.com/afallahi/chat-app/assets/73287428/fdb45117-c57f-42b2-85c5-407cee75ef92)  |  ![chat-app-to-postman](https://github.com/afallahi/chat-app/assets/73287428/a3d1cf51-e5c5-4a42-bba2-6323e28e6ff3)
+
+![chat-app](https://github.com/afallahi/chat-app/assets/73287428/4f1ce88f-773c-461a-817f-41b958404f0e)
+
+
+### CI/CD (TBD)
+
+We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the appropriate pipeline for each project (i.e. backend and frontend).
 
 <p align="center">
     <img src="https://github.com/afallahi/chat-app/assets/73287428/5df8c9c5-262a-4ba6-aefd-63f768c1cb0d">
 </p>
+
+
+
 
 
