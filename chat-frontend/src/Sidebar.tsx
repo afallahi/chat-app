@@ -11,11 +11,11 @@ export default function Sidebar({
 }) {
   return (
     <>
-      <div className="flex-none border-r-2 border-gray-200 w-20 md:w-64">
+      <div className="flex-none border-r-2 border-gray-200 w-20 md:w-40">
         <div className="flex sm:items-center justify-between py-10 px-5">
           <div className="flex items-center space-x-2">
             <img
-              src={`doggos/${me}.jpeg`}
+              src={`people/${me}.png`}
               alt=""
               className="w-8 rounded-full"
             />
@@ -33,7 +33,7 @@ export default function Sidebar({
                   onClick={() => setTarget(user)}
                 >
                   <img
-                    src={`doggos/${user}.jpeg`}
+                    src={`people/${user}.png`}
                     alt=""
                     className="w-4 sm:w-8 h-10 sm:h-8 rounded-full"
                   />

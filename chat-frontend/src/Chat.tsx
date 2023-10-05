@@ -52,7 +52,7 @@ export default function Chat({
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
         <div className="flex items-center space-x-4">
           <img
-            src={`doggos/${target}.jpeg`}
+            src={`people/${target}.png`}
             alt=""
             className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
           />
@@ -103,7 +103,7 @@ export default function Chat({
                     ))}
                   </div>
                   <img
-                    src={`doggos/${group.sender}.jpeg`}
+                    src={`people/${group.sender}.png`}
                     alt="My profile"
                     className={`w-6 h-6 rounded-full order-${
                       group.sender === target ? 1 : 2
