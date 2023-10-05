@@ -10,7 +10,7 @@ type MessageItem = {
   message: string;
 };
 
-const WS_URL = "wss://r4ykbetne9.execute-api.us-east-1.amazonaws.com/dev";
+const WS_URL = `wss://${process.env.REACT_APP_WS_URL_ID}.execute-api.us-east-1.amazonaws.com/dev`;
 const connector = new Connector();
 
 function App() {
@@ -59,6 +59,7 @@ function App() {
   }
 
   const url = `${WS_URL}?username=${username}`;
+  console.log(`url: ${url}`);
   const ws = webSocket.current.getConnection(url);
 
   ws.onmessage = (event) => {
@@ -98,6 +99,7 @@ function App() {
   };
 
   ws.onopen = () => {
+    console.log(`url: ${url}`);
     webSocket.current
       .getConnection(url)
       .send(JSON.stringify({ action: "getUsers" }));
