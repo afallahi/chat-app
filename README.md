@@ -58,9 +58,9 @@
 
 ### Service Types
 
-- Stateful services: 
-- Stateless services: Authentications, profiles, etc (TBD)
-- Third party integrations: e.g. push notifications (TBD)
+- [x] Stateful services: chat service is the only stateful service and users have persistent network connection.
+- [ ] Stateless services: Authentications, profiles, etc (TBD)
+- [ ] Third party integrations: e.g. push notifications (TBD)
 
 ## Architecture
 
@@ -74,13 +74,59 @@
 
 ### Database
 
-For our Serverless Architecture, we use `DynamoDB` database.  DynamoDB is a serverless service meaning that it's billed based on your usage and well integrated with Lambda service that we are using.
+#### Stateless Services
+For services like Authentication and Profile (TBD), Relational databses are a good candidate. We'll revist this once these services implemented.
 
-### Diagram
+#### Chat Service Database
+For Chat service, we will have huge amout of data which users may want to access although the request to have the most recent chat history is more frequent. A key-value NoSQL database looks a better candidate to support our needs although some features (e.g. search) out of scope but might be implemented later.
+For our Serverless Architecture, we use `DynamoDB` database.  
+- [x] DynamoDB is a serverless service meaning that it's billed based on your usage and well integrated with Lambda service that we are using.
+- [x] DynamoDB is horizontally scalable.
+- [x] DynamoDB provides low latency to access data.
+- [ ] DynamoDB is a good candidate if later we decide to improve our service and make it **Multi-Region** service with `Global Tables`. This will result to even lower latency for a system to serve the users across the globe. You may find more details of a Multi-region serverless architecture with DynamoDB Global Tables [here](https://github.com/afallahi/nest-ddb-mr).
+
+## Data Models 
+TBD
+
+## API Design
+
+- connect
+- disconnect
+- send message
+- get messages
+- get users
+
+## Diagram
 
 <p align="center">
     <img src="https://github.com/afallahi/chat-app/assets/73287428/1112df12-ed6a-41d1-98f6-70cb1765fce9">
 </p>
+
+## Backend Microservice Design Pattern
+We select **Serverless Architecture** for the backend with the following details.
+
+### Event-driven 
+We detect the events and act based on them on decoupled services.
+
+#### Benefits
+- Scale and fail independently by decoupling services
+- Agile development with leveraging the event router
+- Reduce costs by spinning the server (or serverless functions) only when trigerred by the event.
+
+### Function as a Service (Faas)
+Function as a Service (Faas) is the comouting part of the Serverless architecture.
+
+#### Benefits
+- Decoupled
+- Lightweight
+- Highly Scalable
+- Highly Available
+- Very cost efficient (pay per use)
+
+## Backend Implementation
+We use API Gateway (WebSocket), Lambda functions, and DynamoDB which are well suited for Serverless application and follow the `event-driven` architecture with `FaaS` serverless compute.
+
+**Note:** With Serverless architecture, we no longer need `Load balancer` or services like `Zookeeper` for `Service Discovery`. API Gateway is good enough for this purpose and our Serverless architecture adapts well to the workload with Lambda functions.
 
 ## Usage
 
