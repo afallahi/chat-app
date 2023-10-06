@@ -233,11 +233,22 @@ We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the
 </p>
 
 
-## Enhancements - Multi_Region Architecture
+## Enhancements - Multi-Region Architecture
 
+Users across the globe connect to the same APIs as well as frontend url available in edge locations.
 
+### Frontend
 
-![multi_region_serverless_chat](https://github.com/afallahi/chat-app/assets/73287428/a07556f8-5041-4095-a414-823c436b9126)
+- Set up a routing rule on Route 53 (e.g. least latency) to route the users to a region.
+- Lambda function maps the S3 buckets to regions and modifies the request to hit the right region.
 
+<p align="center">
+	<img src="https://github.com/afallahi/chat-app/assets/73287428/f24a8930-dc68-4038-b680-1b46551bd2f4">
+</p>
 
+### backend
+
+<p align="center">
+	<img src="https://github.com/afallahi/chat-app/assets/73287428/46ddcd07-b555-4c00-8190-fe5c73bb2764">
+</p>
 
