@@ -29,11 +29,9 @@
 ### Non-Functional Requirements
 - [x] Consistency: Chat service delivers the messages in the same order of receiving from chat parties.
 - [x] Low Latency: User should recieve messages with low latency.
-- [ ] Availability: Should be highly available.
-- [ ] Scalability: Should be highly scalable and adapt to the workload (i.e. number of users and number of messages in a given time period)
-
-**Out of scope:**
-- [ ] Security:  Communication must be secure.
+- [x] Availability: Should be highly available.
+- [x] Scalability: Should be highly scalable and adapt to the workload (i.e. number of users and number of messages in a given time period)
+- [x] Security:  Communication must be secure.
 
 ## System Design
 
@@ -95,6 +93,17 @@ TBD
 - send message
 - get messages
 - get users
+
+## Security
+
+We benefit from API Gateway features to enforce security of the application. We also need to take more steps to make the connection secure.
+
+- [x] Communications Encryption: API Gateway provides encrypted websockets over Transport Layer Security (TLS) with scheme `wss://`.
+- [x] Cross-Site Websocket Hijacking: This is Cross-Site request Forgery (CSRF) for websockets. If Websocket uses cookies for handshakes in the session and does not provide CSRF token, the connection is vulnerable to an attack in which the attacker may obtain sensitive information by establishing a cross-site websocket connection. We are not establishing sessions and are not facing this attack.
+- [x] Denial of Service (DoS): API gateways employ rate limiting and throttling as security measures to mitigate DoS attacks.
+- [ ] Input Validation: If server does not valiadate and sanitize the input, the request to the server might be intercepted and trigger SQL injection or Cross-Site Scripting (XSS) attack by replacing the payload of the request.
+- [ ] Authentication and Authorization: Authentication has not been implemented in this project yet (TBD).
+
 
 ## Diagram
 
@@ -224,6 +233,11 @@ We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the
 </p>
 
 
+## Enhancements - Multi_Region Architecture
+
+
+
+![multi_region_serverless_chat](https://github.com/afallahi/chat-app/assets/73287428/a07556f8-5041-4095-a414-823c436b9126)
 
 
 
