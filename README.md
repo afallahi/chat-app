@@ -233,7 +233,7 @@ We use AWS CodePipeline. A Lambda function accommodates the logic to trigger the
 </p>
 
 
-## Enhancements - Multi_Region Architecture
+## Enhancements - Multi_Region Architecture (TBD)
 
 
 
